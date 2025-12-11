@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JIKAHMEDII COLLECTION</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1.title {
+            color: darkblue;
+            font-family: "Times New Roman", serif;
+            font-size: 80px;
+            text-align: center;
+        }
+
+        .produk-section {
+            margin: 20px;
+        }
+
+        .produk-card {
+            margin-top: 20px;
+        }
+
+        .slider {
+            position: relative;
+            width: 200px;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: 0.5s;
+        }
+
+        .slide-item img {
+            width: 200px;
+            height: 300px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 18px;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        .btn-wa {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: green;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .info-box {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<a href="index.html">HOMEPAGE</a>
+
+<h1 class="title">"A collection of BAJU RAYA by JIKAHMEDII"</h1>
+
+<h1>RENT COLLECTION</h1>
+
+<p><img src="image/darkblue3.jpg" alt="haha" style="width: 200px; height: 200px;"></p>
+
+<section class="produk-section">
+<h2>RENT – Custom/Ready mix Item</h2>
+<div class="produk-grid">
+
+<div class="produk-card">
+    <div class="slider">
+        <div class="slides">
+            <div class="slide-item" data-info="Custom dress • RM • Saiz M">
+                <img src="image/darkblue1.jpg">
+            </div>
+            <div class="slide-item" data-info="Custom dress • RM • Saiz M">
+                <img src="image/darkblue2.jpg">
+            </div>
+        </div>
+        <button class="prev" onclick="moveSlide(this,-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(this,1)">&#10095;</button>
+    </div>
+
+    <div class="info-box"></div>
+
+    <h3>ORANGE</h3>
+    <a class="btn-wa" target="_blank">Tempah WhatsApp</a>
+</div>
+
+</div>
+</section>
+
+<script>
+function moveSlide(button, direction) {
+    const slider = button.parentElement;
+    const slides = slider.querySelector(".slides");
+    const items = slides.querySelectorAll(".slide-item");
+    const infoBox = slider.parentElement.querySelector(".info-box");
+    const waBtn = slider.parentElement.querySelector(".btn-wa");
+
+    let index = parseInt(slider.getAttribute("data-index")) || 0;
+    index = (index + direction + items.length) % items.length;
+    slider.setAttribute("data-index", index);
+
+    slides.style.transform = `translateX(-${index * 200}px)`; 
+
+    const info = items[index].getAttribute("data-info");
+    infoBox.textContent = info;
+
+    const waText = encodeURIComponent(info);
+    waBtn.href = "https://wa.me/60142992105?text=" + waText;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".slider").forEach(slider => {
+        slider.setAttribute("data-index", 0);
+
+        const firstItem = slider.querySelector(".slide-item");
+        const infoBox = slider.parentElement.querySelector(".info-box");
+        const waBtn = slider.parentElement.querySelector(".btn-wa");
+
+        const info = firstItem.getAttribute("data-info");
+        infoBox.textContent = info;
+
+        const waText = encodeURIComponent(info);
+        waBtn.href = "https://wa.me/60142992105?text=" + waText;
+    });
+});
+</script>
+
+</body>
+</html>
